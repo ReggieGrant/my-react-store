@@ -1,0 +1,5 @@
+step 1) move to the folder that contains the node_modules
+        using cd (change directory)
+        drag the folder to the terminar and press enter
+
+step 2) run - npm run devnpm
