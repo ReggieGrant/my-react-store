@@ -1,0 +1,40 @@
+.about{
+    min-height: 400px;
+    background-color: rgba(197, 210, 221, 0.795);
+}
+
+.about h1{
+    text-align: center;
+    padding-top: 20px;
+    color: rgb(115, 160, 174);
+}
+
+.about h5{
+    text-align: center;
+    padding-top: 10px;
+    color: rgb(115, 160, 174);
+}
+
+.about h3{
+    text-align: center;
+    padding-top: 10px;
+    color: rgb(115, 160, 174);
+}
+
+.about p{
+    text-align: center;
+    padding: 20px;
+    color: rgb(115, 160, 174);
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: auto;
+}
+
+.about img{
+    display: block;
+    margin: auto;
+    width: 100%;
+    border-radius: 60%;
+    box-shadow: 2px 2px 5px gray;
+}

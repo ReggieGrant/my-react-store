@@ -1,0 +1,18 @@
+.home{
+    min-height: 400px;
+    background-color: rgba(197, 210, 221, 0.795);
+}
+
+.home h1{
+    text-align: center;
+    padding-top: 20px;
+    color: rgb(115, 160, 174);
+}
+
+.home .top-img{
+    display: block;
+    margin: auto;
+    width: max-content;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px gray;
+}
