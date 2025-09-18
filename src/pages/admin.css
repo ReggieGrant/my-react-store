@@ -1,0 +1,17 @@
+.admin{
+    background-color: antiquewhite;
+}
+
+.admin h1{
+    color: blue;
+}   
+.admin h2{
+    color: green;
+}
+.admin p{
+    color: purple;
+}
+.admin a{
+    color: red;
+}
+/* General styles for better UX */
