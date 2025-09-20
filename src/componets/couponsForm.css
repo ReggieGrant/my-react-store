@@ -24,3 +24,13 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+.coupons-form .error {
+  color: red;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  border: 1px solid red;
+  border-radius: 4px;
+  background-color: bisque;
+    padding: 5px;
+}

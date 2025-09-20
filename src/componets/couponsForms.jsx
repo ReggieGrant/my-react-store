@@ -2,13 +2,24 @@ import { useState } from "react";
 import "./couponsForm.css";
 
 function CouponsForms() {
+  const [allCoupons, setAllCoupons] = useState([]);
   const [coupon, setCoupons] = useState({
     code: "",
     discount: 0,
   });
 
+  const [showError, setShowError] = useState(false);
+
   function save() {
     console.log("Saving...", coupon);
+
+    // validation
+    if (!coupon.code || !coupon.discount) {
+      setShowError(true);
+      return; // exit the function
+    } else {
+      setShowError(false);
+    }
   }
 
   function handleInput(e) {
@@ -23,21 +34,22 @@ function CouponsForms() {
      * - set the copy back
      */
 
-    let copy = { ...coupon };
-    if (name === "code") {
-      copy.code = text;
-    } else {
-      copy.discount = text * 1; // parse it to a number
-    }
-    setCoupons(copy);
+    let copy = [...allCoupons];
+    copy.push(coupon);
+    setAllCoupons(copy);
   }
 
   return (
     <div className="coupons-forms">
       <h3>Coupons</h3>
+      <div className="error">
+        Invalid data, please check again
+        {showError ? <div className="error">Invalid Coupon</div> : null}
+      </div>
 
       <div>
         <label className="form-label">Code</label>
+
         <input
           onBlur={handleInput}
           name="code"
@@ -58,6 +70,14 @@ function CouponsForms() {
         <button onClick={save} className="btn btn-primary">
           Save
         </button>
+
+        <ul className="list-group">
+          {allCoupons.map((cp) => (
+            <li>
+              {cp.code} - {cp.discount}%
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

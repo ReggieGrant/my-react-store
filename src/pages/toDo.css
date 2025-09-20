@@ -1,0 +1,20 @@
+.todo ul li {
+  display: flex;
+  justify-content: space-between;
+  background-color: #eee;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+.todo ul li button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.todo ul li button:hover {
+  background-color: #e60000;
+}   
+/* Additional styles for better UX */
