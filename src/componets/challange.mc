@@ -32,3 +32,13 @@ display a H1
 13 - on save fn, add the todo to the list
 
 14 - below the controls div, map the todos to li
+
+/**
+* create a add@Cart function
+* call that function from the onClick of the button
+**/
+
+Create the Cart page create the files/component
+display H1
+create route for Cart
+create a navbar item

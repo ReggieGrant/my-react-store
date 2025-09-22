@@ -9,14 +9,19 @@ import ProductForm from './componets/productForm'
 import Todo from './pages/toDo'
 
 
+
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import GlobalProvider from './state/globalProvider'
+import Cart from './pages/cart'
 //import QuantityPicker from './componets/quantityPicker'
 
 function App() {
   
 
   return (
-    <BrowserRouter>
+    <GlobalProvider>
+      <BrowserRouter>
       <Navbar/>
 
       <Routes>
@@ -27,13 +32,15 @@ function App() {
         <Route path='/admin' element={<Admin/>} ></Route>
         <Route path='/productform' element={<ProductForm/>} ></Route>
         <Route path='/todo' element={<Todo />} ></Route>
+        <Route path='/cart' element={<Cart />} ></Route>
       </Routes>
       
       
       
       {/* footer */}
 
-    </BrowserRouter>
+      </BrowserRouter>
+    </GlobalProvider>
   );
 }
 

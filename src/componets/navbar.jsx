@@ -40,7 +40,12 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <Link to="/toDo" className="nav-link">
-                Shopping List
+                My Shopping List
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/cart" className="nav-link">
+                Cart
               </Link>
             </li>
           </ul>
