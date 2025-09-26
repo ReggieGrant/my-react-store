@@ -1,17 +1,511 @@
-.admin{
-    background-color: antiquewhite;
+/* Admin Page Styles - Matching App.css Aesthetic */
+
+.admin {
+  padding: var(--space-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 90vh;
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.admin h1{
-    color: blue;
-}   
-.admin h2{
-    color: green;
+.admin h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  margin-bottom: var(--space-2xl);
+  text-align: center;
+  letter-spacing: -0.02em;
+  
+  background: linear-gradient(135deg, #646cff 0%, #61dafb 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientText 3s ease-in-out infinite;
+  
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  position: relative;
 }
-.admin p{
-    color: purple;
+
+.admin h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--accent-gradient);
+  border-radius: 2px;
 }
-.admin a{
-    color: red;
+
+/* Admin Dashboard Layout */
+.admin .parent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--space-2xl);
+  align-items: start;
 }
-/* General styles for better UX */
+
+/* Admin Panel Sections */
+.admin-section {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--glass-border);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 var(--shadow-light);
+  
+  padding: var(--space-2xl);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-gradient);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.admin-section:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 10px 20px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 var(--shadow-light);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Section Headers */
+.admin h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-lg) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.admin h2::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--accent-gradient);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+}
+
+/* Form Styling */
+.admin form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.admin label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.admin input,
+.admin textarea,
+.admin select {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  border: 2px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  backdrop-filter: blur(10px);
+  
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.admin input:focus,
+.admin textarea:focus,
+.admin select:focus {
+  outline: none;
+  border-color: #646cff;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 8px 25px rgba(100, 108, 255, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.admin input::placeholder,
+.admin textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+.admin textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.admin select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 48px;
+  appearance: none;
+}
+
+/* Button Styling */
+.admin button {
+  position: relative;
+  border-radius: var(--radius-md);
+  border: none;
+  padding: var(--space-md) var(--space-xl);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+  
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 140px;
+}
+
+.admin button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s;
+}
+
+.admin button:hover::before {
+  left: 100%;
+}
+
+/* Primary Button (Submit/Save) */
+.admin button[type="submit"],
+.admin .btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+  box-shadow: 
+    0 8px 25px rgba(100, 108, 255, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.admin button[type="submit"]:hover,
+.admin .btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 35px rgba(100, 108, 255, 0.6),
+    0 6px 16px rgba(0, 0, 0, 0.3);
+  background: var(--secondary-gradient);
+}
+
+/* Secondary Button */
+.admin .btn-secondary {
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  color: var(--text-primary);
+  border: 2px solid var(--glass-border);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 var(--shadow-light);
+}
+
+.admin .btn-secondary:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(100, 108, 255, 0.5);
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 var(--shadow-light);
+}
+
+/* Danger Button (Delete) */
+.admin .btn-danger {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  box-shadow: 
+    0 8px 25px rgba(245, 87, 108, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.admin .btn-danger:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 35px rgba(245, 87, 108, 0.6),
+    0 6px 16px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #f5576c 0%, #e91e63 100%);
+}
+
+/* Success Button */
+.admin .btn-success {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  box-shadow: 
+    0 8px 25px rgba(79, 172, 254, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.admin .btn-success:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 35px rgba(79, 172, 254, 0.6),
+    0 6px 16px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+}
+
+/* Button Group */
+.admin .button-group {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: flex-end;
+  margin-top: var(--space-lg);
+}
+
+/* Status Messages */
+.admin .status-message {
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
+  border: 1px solid;
+  backdrop-filter: blur(10px);
+}
+
+.admin .status-success {
+  background: rgba(79, 172, 254, 0.1);
+  border-color: rgba(79, 172, 254, 0.3);
+  color: #4facfe;
+}
+
+.admin .status-error {
+  background: rgba(245, 87, 108, 0.1);
+  border-color: rgba(245, 87, 108, 0.3);
+  color: #f5576c;
+}
+
+.admin .status-warning {
+  background: rgba(255, 193, 7, 0.1);
+  border-color: rgba(255, 193, 7, 0.3);
+  color: #ffc107;
+}
+
+/* Data Tables */
+.admin table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--space-lg);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.admin th,
+.admin td {
+  padding: var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.admin th {
+  background: rgba(100, 108, 255, 0.1);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.admin td {
+  color: var(--text-secondary);
+}
+
+.admin tr:hover td {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+/* File Upload Styling */
+.admin input[type="file"] {
+  position: relative;
+  cursor: pointer;
+  background: var(--glass-bg);
+  padding: var(--space-lg);
+  text-align: center;
+  border: 2px dashed var(--glass-border);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+}
+
+.admin input[type="file"]:hover {
+  border-color: rgba(100, 108, 255, 0.5);
+  background: rgba(100, 108, 255, 0.05);
+}
+
+/* Checkbox and Radio Styling */
+.admin input[type="checkbox"],
+.admin input[type="radio"] {
+  width: auto;
+  margin-right: var(--space-sm);
+  accent-color: #646cff;
+}
+
+
+
+.admin input[type="number"]::-webkit-outer-spin-button,
+.admin input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Progress Bar */
+.admin .progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: var(--space-md) 0;
+}
+
+.admin .progress-fill {
+  height: 100%;
+  background: var(--accent-gradient);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin {
+    padding: var(--space-xl) var(--space-md);
+  }
+  
+  .admin .parent {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+  
+  .admin-section {
+    padding: var(--space-xl);
+  }
+  
+  .admin .button-group {
+    flex-direction: column;
+  }
+  
+  .admin button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .admin h1 {
+    font-size: 1.8rem;
+  }
+  
+  .admin-section {
+    padding: var(--space-lg);
+  }
+  
+  .admin input,
+  .admin textarea,
+  .admin select {
+    padding: var(--space-sm) var(--space-md);
+  }
+}
+
+/* Animation for admin sections */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.admin-section {
+  animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-section:nth-child(1) { animation-delay: 0.1s; }
+.admin-section:nth-child(2) { animation-delay: 0.3s; }
+
+/* Focus styles for accessibility */
+.admin button:focus,
+.admin input:focus,
+.admin textarea:focus,
+.admin select:focus {
+  outline: 3px solid rgba(100, 108, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Glass effect enhancement */
+@supports (backdrop-filter: blur(20px)) {
+  .admin-section {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  .admin input,
+  .admin textarea,
+  .admin select {
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: light) {
+  .admin-section {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin input,
+  .admin textarea,
+  .admin select {
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin th {
+    background: rgba(100, 108, 255, 0.05);
+  }
+  
+  .admin tr:hover td {
+    background: rgba(0, 0, 0, 0.02);
+  }
+}

@@ -403,4 +403,51 @@ html {
       radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
       linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e0 100%);
   }
+
+  /* Add these styles to your existing App.css file */
+
+/* App Container for Footer Layout */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure the root container works with the new layout */
+#root {
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0; /* Remove padding from root since we'll handle it in components */
+  text-align: center;
+  position: relative;
+  
+  /* Keep your existing background styles */
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+  
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Add padding back to individual pages/components as needed */
+.main-content > * {
+  padding: var(--space-xl);
+}
+
+/* Responsive adjustments for the new layout */
+@media (max-width: 768px) {
+  .main-content > * {
+    padding: var(--space-md);
+  }
+}
 }

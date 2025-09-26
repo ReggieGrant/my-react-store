@@ -7,66 +7,102 @@ function Catalog() {
   const [productsGlobal, setProductsGlobal] = useState([]);
   const [categories, setCategories] = useState([]);
   const [productsToDisplay, setProductsToDisplay] = useState([]);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [loading, setLoading] = useState(true);
 
   useEffect(function () {
-    console.log("Componet loaded");
+    console.log("Component loaded");
     loadCatalog();
   }, []);
 
   function filter(category) {
     console.log(category);
-    // please create the logic to filter the productsGlobal using the category
+    setActiveCategory(category);
+    
     let filteredProducts = [];
     for (let i = 0; i < productsGlobal.length; i++) {
       let temp = productsGlobal[i];
       if (temp.category === category) {
         filteredProducts.push(temp);
       }
-      
     }
     setProductsToDisplay(filteredProducts);
     console.log(filteredProducts);
-    // the real miniChallange
-    // now i have the filtered product, i need to update my page using only the filtered products 
   }
 
   function clearFilter(){
+    setActiveCategory('all');
     setProductsToDisplay(productsGlobal);
-    // this function will clear the filter and show all the products
-    // you can call this function when the user clicks on a "Clear Filter" button
   }
 
-  function loadCatalog() {
-    // get the products from the service
-    let service = new DataService();
-    let products = service.getProducts();
-    console.log(products);
-    setProductsGlobal(products);
-    let categoriesLocal = ["smart tv", "computers", "smartphones", "utils"];
-    setCategories(categoriesLocal);
-    setProductsToDisplay(products);
-    // using this logic do the same but into the products componet (just the use Effect)
+  async function loadCatalog() {
+    try {
+      setLoading(true);
+      // Get the products from the service
+      let service = new DataService();
+      let products = service.getProducts();
+      console.log(products);
+      setProductsGlobal(products);
+      
+      let categoriesLocal = ["smart tv", "computers", "smartphones", "utils"];
+      setCategories(categoriesLocal);
+      setProductsToDisplay(products);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error loading catalog:', error);
+      setLoading(false);
+    }
   }
-  <Products />;
+
+  if (loading) {
+    return (
+      <div className="catalog">
+        <div className="catalog-loading"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="catalog">
-      <h2>Catalog Page</h2>
-      <h3>Hello we have {productsGlobal.length} new products</h3>
-      <button onClick={clearFilter} className="btn btn-warning m-1">All</button>
-      {categories.map((catTemp) => (
-        <button
-          onClick={() => filter(catTemp)}
-          key={catTemp}
-          className="btn btn-info m-1"
+      <h2>Product Catalog</h2>
+      
+      <div className="catalog-count">
+        <h3>Discover {productsGlobal.length} amazing products</h3>
+      </div>
+
+      {/* Filter Buttons */}
+      <div className="catalog-filters">
+        <button 
+          onClick={clearFilter} 
+          className={`btn btn-warning m-1 ${activeCategory === 'all' ? 'active' : ''}`}
         >
-          {catTemp}
+          All Products
         </button>
-      ))}
-      {productsToDisplay.map((temporal) => (
-        <Products dataProps={temporal} key={temporal.id} />
-      ))}
-      {/* Here i want to create buttons using the categories StateVariable */}
+        
+        {categories.map((catTemp) => (
+          <button
+            onClick={() => filter(catTemp)}
+            key={catTemp}
+            className={`btn btn-info m-1 ${activeCategory === catTemp ? 'active' : ''}`}
+          >
+            {catTemp}
+          </button>
+        ))}
+      </div>
+
+      {/* Products Display */}
+      {productsToDisplay.length === 0 && !loading ? (
+        <div className="catalog-empty">
+          <h3>No products found</h3>
+          <p>Try selecting a different category or clear the filters.</p>
+        </div>
+      ) : (
+        <div className="catalog-products">
+          {productsToDisplay.map((temporal) => (
+            <Products dataProps={temporal} key={temporal.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
